@@ -15,4 +15,5 @@ form {
   gap: 24px;
   padding: 2rem;
   border: solid grey 1px;
+  border-radius: 1rem;
 }
