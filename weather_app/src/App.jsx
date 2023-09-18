@@ -4,8 +4,14 @@ import { uid } from "uid";
 
 function App() {
   const isGoodWeather = true;
+  const [activities, setActivities] = useState([]);
+
+  function handleAddActivity(newActivity) {
+    setActivities([...activities, { id: uid(), ...newActivity }]);
+    console.log(newActivity);
+  }
+
   activities.filter((activity) => activity.isForGoodWeather === isGoodWeather);
-  const [activities, setActivities] = useState("");
   async function weatherFetch() {
     try {
       const response = await fetch(
@@ -20,10 +26,6 @@ function App() {
   useEffect(() => {
     weatherFetch();
   });
-
-  function handleAddActivity(newActivity) {
-    setActivities([...activities, { id: uid(), ...newActivity }]);
-  }
 
   return (
     <>
