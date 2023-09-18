@@ -6,16 +6,6 @@ function App() {
   const isGoodWeather = true;
   activities.filter((activity) => activity.isForGoodWeather === isGoodWeather);
   const [activities, setActivities] = useState("");
-
-  function handleAddActivity(newActivity) {
-    setActivities([...activities, { id: uid(), ...newActivity }]);
-  }
-
-  return (
-    <>
-      <Form onAddActivity={handleAddActivity} />
-    </>
-  );
   async function weatherFetch() {
     try {
       const response = await fetch(
@@ -30,6 +20,16 @@ function App() {
   useEffect(() => {
     weatherFetch();
   });
+
+  function handleAddActivity(newActivity) {
+    setActivities([...activities, { id: uid(), ...newActivity }]);
+  }
+
+  return (
+    <>
+      <Form onAddActivity={handleAddActivity} />
+    </>
+  );
 }
 
 export default App;
