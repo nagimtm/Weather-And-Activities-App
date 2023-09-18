@@ -1,15 +1,18 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 
 import { Form } from "./Form";
-// import "./App.css";
+import { uid } from "uid";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [activities, setActivities] = useState("");
+
+  function handleAddActivity(newActivity) {
+    setActivities([...activities, { id: uid(), ...newActivity }]);
+  }
 
   return (
     <>
-      <Form />
+      <Form onAddActivity={handleAddActivity} />
     </>
   );
 }
