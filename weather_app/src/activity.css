@@ -1,0 +1,9 @@
+section {
+  background-color: aqua;
+}
+.activity__name-good {
+  color: blue;
+}
+.activity__name-bad {
+  color: black;
+}

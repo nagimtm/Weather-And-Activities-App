@@ -1,5 +1,5 @@
 import "./styles.css";
-export function Form({ onAddActivity }) {
+export function Form({ onAddActivity, name }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -20,16 +20,17 @@ export function Form({ onAddActivity }) {
     >
       <h1>WAAA</h1>
       <div className="form--div">
-        <label htmlFor="name">Activity Name</label>
+        <label htmlFor="name">Add Activity</label>
         <input
           id="name"
           type="text"
           name="name"
-          placeholder="write your activity here..."
+          placeholder="name of the activity..."
+          maxLength="30"
         ></input>
       </div>
       <div className="form--div">
-        <label htmlFor="checkGoodWeather">Check if it is good weather</label>
+        <label htmlFor="checkGoodWeather">Good weather activity?</label>
         <input
           id="checkGoodWeather"
           name="checkGoodWeather"

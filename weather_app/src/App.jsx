@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import { Form } from "./Form";
 import { uid } from "uid";
-
+import Activity from "./Activity";
 function App() {
   const isGoodWeather = true;
+  const [activities, setActivities] = useState([]);
+
+  function handleAddActivity(newActivity) {
+    setActivities([...activities, { id: uid(), ...newActivity }]);
+    console.log(newActivity);
+  }
+
   activities.filter((activity) => activity.isForGoodWeather === isGoodWeather);
-  const [activities, setActivities] = useState("");
   async function weatherFetch() {
     try {
       const response = await fetch(
@@ -21,13 +27,14 @@ function App() {
     weatherFetch();
   });
 
-  function handleAddActivity(newActivity) {
-    setActivities([...activities, { id: uid(), ...newActivity }]);
-  }
-
   return (
     <>
       <Form onAddActivity={handleAddActivity} />
+      <Activity
+        name={activities.name}
+        isGoodWeather={activities.isGoodWeather}
+        onAddActivity={handleAddActivity}
+      ></Activity>
     </>
   );
 }
