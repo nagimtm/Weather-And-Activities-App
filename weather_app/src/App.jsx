@@ -8,7 +8,7 @@ import "./styles.css";
 function App() {
   const [emoji, setEmoji] = useState("");
   const [temp, setTemp] = useState("");
-  const [weather, setWeather] = useState("");
+  const [weather, setWeather] = useState(true);
   const [activities, setActivities] = useLocalStorageState("activity", {
     defaultValue: [],
   });
@@ -17,9 +17,14 @@ function App() {
     setActivities([...activities, { id: uid(), ...newActivity }]);
     console.log(newActivity);
   }
+
   function handleDeleteActivity(id) {
     setActivities(activities.filter((activity) => activity.id !== id));
   }
+
+  const filteredActivities = activities.filter(
+    (activity) => activity.isForGoodWeather === weather
+  );
 
   async function weatherFetch() {
     try {
@@ -27,20 +32,18 @@ function App() {
         "https://example-apis.vercel.app/api/weather"
       );
       const data = await response.json();
-      setWeather(data);
+      setWeather(data.isGoodWeather);
       setEmoji(data.condition);
       setTemp(data.temperature);
-      console.log("api data ", data);
-      console.log("data", data);
     } catch (error) {
       console.log("Error", error);
     }
   }
+
   useEffect(() => {
     const setInterval = weatherFetch();
     return () => clearInterval(setInterval);
   }, []);
-
   return (
     <>
       <header>
@@ -48,16 +51,11 @@ function App() {
         <p className="weather--temperature">{temp}C°</p>
       </header>
       <Form onAddActivity={handleAddActivity} />
-      {activities.map((activity) => (
-        <List
-          key={activity.id}
-          activities={activity.name}
-          isGoodWeather={weather.isGoodWeather}
-          onDeleteActivity={() => handleDeleteActivity(activity.id)}
-        />
-      ))}
+      <List
+        activities={filteredActivities}
+        onDeleteActivity={handleAddActivity}
+      />
     </>
   );
 }
-
 export default App;
