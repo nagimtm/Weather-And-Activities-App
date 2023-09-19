@@ -30,13 +30,15 @@ function App() {
       setWeather(data);
       setEmoji(data.condition);
       setTemp(data.temperature);
+      console.log("api data ", data);
       console.log("data", data);
     } catch (error) {
       console.log("Error", error);
     }
   }
   useEffect(() => {
-    weatherFetch();
+    const setInterval = weatherFetch();
+    return () => clearInterval(setInterval);
   }, []);
 
   return (
