@@ -8,7 +8,7 @@ import "./styles.css";
 function App() {
   const [emoji, setEmoji] = useState("");
   const [temp, setTemp] = useState("");
-  const [weather, setWeather] = useState("");
+  const [weather, setWeather] = useState(true);
   const [activities, setActivities] = useLocalStorageState("activity", {
     defaultValue: [],
   });
@@ -21,17 +21,20 @@ function App() {
     setActivities(activities.filter((activity) => activity.id !== id));
   }
 
+  // const filteredActivities = activities.filter(
+  //   (activity) => activity.isForGoodWeather === weather.isGoodWeather
+  // );
+
   async function weatherFetch() {
     try {
       const response = await fetch(
         "https://example-apis.vercel.app/api/weather"
       );
       const data = await response.json();
+      console.log("data", data);
       setWeather(data);
       setEmoji(data.condition);
       setTemp(data.temperature);
-      console.log("api data ", data);
-      console.log("data", data);
     } catch (error) {
       console.log("Error", error);
     }
@@ -47,11 +50,18 @@ function App() {
         <p className="weather--emoji">{emoji}</p>
         <p className="weather--temperature">{temp}C°</p>
       </header>
-      <Form onAddActivity={handleAddActivity} />
+      <Form
+        title={
+          weather.isGoodWeather
+            ? "good weather activities"
+            : "bad weather activities"
+        }
+        onAddActivity={handleAddActivity}
+      />
       {activities.map((activity) => (
         <List
-          key={activity.id}
           activities={activity.name}
+          key={activity.id}
           isGoodWeather={weather.isGoodWeather}
           onDeleteActivity={() => handleDeleteActivity(activity.id)}
         />

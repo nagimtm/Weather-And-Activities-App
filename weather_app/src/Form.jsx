@@ -1,5 +1,5 @@
 import "./styles.css";
-export function Form({ onAddActivity }) {
+export function Form({ onAddActivity, title }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -20,7 +20,7 @@ export function Form({ onAddActivity }) {
       aria-labelledby="weather-activities"
       onSubmit={handleSubmit}
     >
-      <h1>weather&activities</h1>
+      <h1>{title}</h1>
       <div className="form--div">
         <label htmlFor="name">Add Activity</label>
         <input
