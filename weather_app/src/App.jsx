@@ -22,7 +22,6 @@ function App() {
     setActivities(activities.filter((activity) => activity.id !== id));
   }
 
-
   const filteredActivities = activities.filter(
     (activity) => activity.isForGoodWeather === weather
   );
@@ -33,6 +32,7 @@ function App() {
         "https://example-apis.vercel.app/api/weather"
       );
       const data = await response.json();
+      console.log(data);
       setWeather(data.isGoodWeather);
       setEmoji(data.condition);
       setTemp(data.temperature);
@@ -52,16 +52,12 @@ function App() {
         <p className="weather--temperature">{temp}C°</p>
       </header>
       <Form
-        title={
-          weather.isGoodWeather
-            ? "good weather activities"
-            : "bad weather activities"
-        }
+        title={weather ? "good weather activities" : "bad weather activities"}
         onAddActivity={handleAddActivity}
       />
       <List
         activities={filteredActivities}
-        onDeleteActivity={handleAddActivity}
+        onDeleteActivity={handleDeleteActivity}
       />
     </>
   );

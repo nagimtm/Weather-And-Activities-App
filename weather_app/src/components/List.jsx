@@ -9,7 +9,6 @@ export default function List({ activities, onDeleteActivity }) {
         <Fragment key={activity.id}>
           <li>
             {activity.name}
-
             <button className="delete-button" onClick={onDeleteActivity}>
               x
             </button>
