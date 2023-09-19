@@ -5,15 +5,13 @@ import List from "./components/List";
 import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const isGoodWeather = true;
+  let isForGoodWeather = true;
   const [activities, setActivities] = useLocalStorageState("activity", {
     defaultValue: [],
   });
 
   function handleAddActivity(newActivity) {
     setActivities([...activities, { id: uid(), ...newActivity }]);
-
-    console.log(newActivity);
   }
 
   async function weatherFetch() {
@@ -22,27 +20,22 @@ function App() {
         "https://example-apis.vercel.app/api/weather"
       );
       const data = await response.json();
-      console.log("data", data);
+      console.log("api data ", data);
     } catch (error) {
       console.log("Error", error);
     }
   }
   useEffect(() => {
-    weatherFetch();
+    const setInterval = weatherFetch();
+    return () => clearInterval(setInterval);
   });
-
-  console.log("ACTIVITIES> ", activities);
 
   return (
     <>
       <Form onAddActivity={handleAddActivity} />
       <ul className="list">
-        {activities.filter((activity) => (
-          <List
-            key={activity.id}
-            name={activity.name}
-            isGoodWeather={activity.isGoodWeather}
-          />
+        {activities.map((activity) => (
+          <List key={activity.id} name={activity.name} />
         ))}
       </ul>
     </>

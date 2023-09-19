@@ -4,9 +4,10 @@ export function Form({ onAddActivity }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    console.log("checkbox value", event.target.checkGoodWeather.checked);
     const activity = {
       name: data.name,
-      isForGoodWeather: data?.checkGoodWeather,
+      isForGoodWeather: event.target.checkGoodWeather.checked,
     };
     onAddActivity(activity);
     event.target.reset();
