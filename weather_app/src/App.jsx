@@ -1,18 +1,21 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Form } from "./Form";
 import { uid } from "uid";
 import List from "./components/List";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
   const isGoodWeather = true;
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useLocalStorageState("activity", {
+    defaultValue: [],
+  });
 
   function handleAddActivity(newActivity) {
     setActivities([...activities, { id: uid(), ...newActivity }]);
+
     console.log(newActivity);
   }
 
-  activities.filter((activity) => activity.isForGoodWeather === isGoodWeather);
   async function weatherFetch() {
     try {
       const response = await fetch(
@@ -28,14 +31,20 @@ function App() {
     weatherFetch();
   });
 
+  console.log("ACTIVITIES> ", activities);
+
   return (
     <>
       <Form onAddActivity={handleAddActivity} />
-      <List
-        name={activities.name}
-        isGoodWeather={activities.isGoodWeather}
-        onAddActivity={handleAddActivity}
-      ></List>
+      <ul className="list">
+        {activities.filter((activity) => (
+          <List
+            key={activity.id}
+            name={activity.name}
+            isGoodWeather={activity.isGoodWeather}
+          />
+        ))}
+      </ul>
     </>
   );
 }

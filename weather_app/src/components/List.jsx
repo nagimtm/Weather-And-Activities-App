@@ -1,10 +1,6 @@
-import localStorage from "use-local-storage-state";
 import "./list.css";
 
 export default function List({ name, isGoodWeather }) {
-  const [activities, setActivities] = localStorage("activities", {
-    defaultValue: [],
-  });
   return (
     <>
       <li
@@ -13,6 +9,7 @@ export default function List({ name, isGoodWeather }) {
         }`}
       >
         {name}
+        {isGoodWeather}
       </li>
     </>
   );
