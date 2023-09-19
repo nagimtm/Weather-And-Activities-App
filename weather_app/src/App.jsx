@@ -17,13 +17,15 @@ function App() {
     setActivities([...activities, { id: uid(), ...newActivity }]);
     console.log(newActivity);
   }
+
   function handleDeleteActivity(id) {
     setActivities(activities.filter((activity) => activity.id !== id));
   }
 
-  // const filteredActivities = activities.filter(
-  //   (activity) => activity.isForGoodWeather === weather.isGoodWeather
-  // );
+
+  const filteredActivities = activities.filter(
+    (activity) => activity.isForGoodWeather === weather
+  );
 
   async function weatherFetch() {
     try {
@@ -31,19 +33,18 @@ function App() {
         "https://example-apis.vercel.app/api/weather"
       );
       const data = await response.json();
-      console.log("data", data);
-      setWeather(data);
+      setWeather(data.isGoodWeather);
       setEmoji(data.condition);
       setTemp(data.temperature);
     } catch (error) {
       console.log("Error", error);
     }
   }
+
   useEffect(() => {
     const setInterval = weatherFetch();
     return () => clearInterval(setInterval);
   }, []);
-
   return (
     <>
       <header>
@@ -58,16 +59,11 @@ function App() {
         }
         onAddActivity={handleAddActivity}
       />
-      {activities.map((activity) => (
-        <List
-          activities={activity.name}
-          key={activity.id}
-          isGoodWeather={weather.isGoodWeather}
-          onDeleteActivity={() => handleDeleteActivity(activity.id)}
-        />
-      ))}
+      <List
+        activities={filteredActivities}
+        onDeleteActivity={handleAddActivity}
+      />
     </>
   );
 }
-
 export default App;
