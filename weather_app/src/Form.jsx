@@ -6,7 +6,7 @@ export function Form({ onAddActivity }) {
     const data = Object.fromEntries(formData);
     const activity = {
       name: data.name,
-      isForGoodWeather: data?.checkGoodWeather,
+      isForGoodWeather: event.target.checkGoodWeather.checked,
     };
     onAddActivity(activity);
     event.target.reset();
@@ -19,7 +19,7 @@ export function Form({ onAddActivity }) {
       aria-labelledby="weather-activities"
       onSubmit={handleSubmit}
     >
-      <h1>WAAA</h1>
+      <h1>weather&activities</h1>
       <div className="form--div">
         <label htmlFor="name">Add Activity</label>
         <input

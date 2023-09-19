@@ -1,16 +1,15 @@
 import "./list.css";
 
-export default function List({ name, isGoodWeather }) {
+export default function List({ activities, isGoodWeather, onDeleteActivity }) {
   return (
-    <>
-      <li
-        className={`activity__name${
-          isGoodWeather ? "activity__name-good" : "activity__name-bad"
-        }`}
-      >
-        {name}
+    <div className="newActivity">
+      <li>
+        {activities}
         {isGoodWeather}
+        <button className="delete-button" onClick={onDeleteActivity}>
+          x
+        </button>
       </li>
-    </>
+    </div>
   );
 }
