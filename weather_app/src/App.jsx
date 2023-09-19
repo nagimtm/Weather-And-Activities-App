@@ -22,6 +22,7 @@ function App() {
     setActivities(activities.filter((activity) => activity.id !== id));
   }
 
+
   const filteredActivities = activities.filter(
     (activity) => activity.isForGoodWeather === weather
   );
@@ -50,7 +51,14 @@ function App() {
         <p className="weather--emoji">{emoji}</p>
         <p className="weather--temperature">{temp}C°</p>
       </header>
-      <Form onAddActivity={handleAddActivity} />
+      <Form
+        title={
+          weather.isGoodWeather
+            ? "good weather activities"
+            : "bad weather activities"
+        }
+        onAddActivity={handleAddActivity}
+      />
       <List
         activities={filteredActivities}
         onDeleteActivity={handleAddActivity}
