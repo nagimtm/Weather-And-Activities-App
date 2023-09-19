@@ -10,7 +10,10 @@ export default function List({ activities, onDeleteActivity }) {
           <li>
             {activity.name}
 
-            <button className="delete-button" onClick={onDeleteActivity}>
+            <button
+              className="delete-button"
+              onClick={() => onDeleteActivity(activity.id)}
+            >
               x
             </button>
           </li>
