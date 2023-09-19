@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Form } from "./Form";
 import { uid } from "uid";
-import Activity from "./Activity";
+import List from "./components/List";
+
 function App() {
   const isGoodWeather = true;
   const [activities, setActivities] = useState([]);
@@ -30,11 +31,11 @@ function App() {
   return (
     <>
       <Form onAddActivity={handleAddActivity} />
-      <Activity
+      <List
         name={activities.name}
         isGoodWeather={activities.isGoodWeather}
         onAddActivity={handleAddActivity}
-      ></Activity>
+      ></List>
     </>
   );
 }

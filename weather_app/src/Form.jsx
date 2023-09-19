@@ -1,5 +1,5 @@
 import "./styles.css";
-export function Form({ onAddActivity, name }) {
+export function Form({ onAddActivity }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -12,6 +12,7 @@ export function Form({ onAddActivity, name }) {
     event.target.reset();
     event.target.focus();
   }
+
   return (
     <form
       className="form"
