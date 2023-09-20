@@ -42,7 +42,7 @@ function App() {
   }
 
   useEffect(() => {
-    const interval = setInterval(weatherFetch, 5000);
+    const interval = setInterval(weatherFetch, 2000);
     return () => clearInterval(interval);
   }, []);
   return (
