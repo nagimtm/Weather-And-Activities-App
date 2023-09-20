@@ -7,20 +7,26 @@ body {
   font-family: "Courier New", Courier, monospace;
 }
 .newActivity {
-  background-color: rgb(228, 228, 228);
-  padding: 10px;
   margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
   position: relative;
+  gap: 1rem;
 }
 .delete-button {
   position: absolute;
   right: 2rem;
   border-radius: 20px;
+  background-color: none;
+  border: none;
+  padding: 5x;
 }
 li {
+  background-color: rgb(255, 255, 255);
+  width: 65%;
+  padding: 10px;
+  border-radius: 10px;
   list-style: none;
 }
