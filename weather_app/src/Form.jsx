@@ -1,5 +1,5 @@
 import "./styles.css";
-export function Form({ onAddActivity, title }) {
+export function Form({ onAddActivity, title, loading }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);

@@ -7,7 +7,7 @@ import "./styles.css";
 
 function App() {
   const [emoji, setEmoji] = useState("⏳");
-  const [temp, setTemp] = useState("Loading...");
+  const [temp, setTemp] = useState("");
   const [weather, setWeather] = useState(true);
   const [activities, setActivities] = useLocalStorageState("activity", {
     defaultValue: [],
@@ -50,11 +50,17 @@ function App() {
       <header>
         <p className="weather--emoji">{emoji}</p>
         <p className="weather--temperature">
-          {temp === "Loading..." ? temp : `${temp}°C`}
+          {!temp ? "Loading..." : `${temp}°C`}
         </p>
       </header>
       <Form
-        title={weather ? "good weather activities" : "bad weather activities"}
+        title={
+          !temp
+            ? ""
+            : weather
+            ? "good weather activities"
+            : "bad weather activities"
+        }
         onAddActivity={handleAddActivity}
       />
       <List
