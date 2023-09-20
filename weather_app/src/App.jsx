@@ -49,7 +49,9 @@ function App() {
     <>
       <header>
         <p className="weather--emoji">{emoji}</p>
-        <p className="weather--temperature">{temp}C°</p>
+        <p className="weather--temperature">
+          {temp === "Loading..." ? temp : `${temp}°C`}
+        </p>
       </header>
       <Form
         title={weather ? "good weather activities" : "bad weather activities"}
