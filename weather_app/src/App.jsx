@@ -6,8 +6,8 @@ import useLocalStorageState from "use-local-storage-state";
 import "./styles.css";
 
 function App() {
-  const [emoji, setEmoji] = useState("");
-  const [temp, setTemp] = useState("");
+  const [emoji, setEmoji] = useState("⏳");
+  const [temp, setTemp] = useState("Loading...");
   const [weather, setWeather] = useState(true);
   const [activities, setActivities] = useLocalStorageState("activity", {
     defaultValue: [],
