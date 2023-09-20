@@ -22,7 +22,6 @@ function App() {
     setActivities(activities.filter((activity) => activity.id !== id));
   }
 
-
   const filteredActivities = activities.filter(
     (activity) => activity.isForGoodWeather === weather
   );
@@ -42,8 +41,8 @@ function App() {
   }
 
   useEffect(() => {
-    const setInterval = weatherFetch();
-    return () => clearInterval(setInterval);
+    const interval = setInterval(weatherFetch, 5000);
+    return () => clearInterval(interval);
   }, []);
   return (
     <>
@@ -52,16 +51,12 @@ function App() {
         <p className="weather--temperature">{temp}C°</p>
       </header>
       <Form
-        title={
-          weather.isGoodWeather
-            ? "good weather activities"
-            : "bad weather activities"
-        }
+        title={weather ? "good weather activities" : "bad weather activities"}
         onAddActivity={handleAddActivity}
       />
       <List
         activities={filteredActivities}
-        onDeleteActivity={handleAddActivity}
+        onDeleteActivity={handleDeleteActivity}
       />
     </>
   );
